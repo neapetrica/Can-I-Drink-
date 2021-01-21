@@ -17,7 +17,7 @@ function girafa(){
  function elefant(){
  	Swal.fire({
   icon: 'success',
-  title: 'Poti bea linistit alcool nu ghimbir in plm!',
+  title: 'Poti sa bei linistit!',
   showConfirmButton: false,
   timer: 1500
 })
