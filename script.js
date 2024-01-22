@@ -1,24 +1,52 @@
-function girafa(){
-             Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'De ce are urechile asa mari aceasta girafa?!',
-  footer: '<a href="https://i.pinimg.com/originals/b5/4f/86/b54f86fb4815676d67808065277b6d4f.jpg">Ramai prost daca vezi cum arata o girafa!</a>'
-})
- }
- function maimuta(){
-             Swal.fire({
-  icon: 'error',
-  title: 'Oops...',
-  text: 'Cam urata maimuta!',
-  footer: '<a href="https://unghiul.com/wp-content/uploads/2017/10/stop-alcohol.jpg">Sigur era apa in paharul ala?</a>'
-})
- }
- function elefant(){
- 	Swal.fire({
-  icon: 'success',
-  title: 'Poti sa bei linistit!',
-  showConfirmButton: false,
-  timer: 1500
-})
- }
+document.addEventListener('DOMContentLoaded', function () {
+    const checkboxes = document.querySelectorAll('.checkbox');
+    const totalAmountElement = document.getElementById('total-amount');
+    const packages = document.querySelectorAll('.package');
+  
+    let totalAmount = 45;
+  
+    checkboxes.forEach(function (checkbox) {
+      checkbox.addEventListener('change', function () {
+        const price = parseInt(checkbox.getAttribute('data-price'));
+  
+        if (checkbox.checked) {
+          totalAmount += price;
+        } else {
+          totalAmount -= price;
+        }
+  
+        totalAmountElement.textContent = totalAmount + ' Euro';
+      });
+    });
+  
+    packages.forEach(function (package) {
+      package.addEventListener('click', function (event) {
+        console.log('Click pe pachet');
+  
+        const options = package.querySelectorAll('.option');
+        const clickedInsideOption = Array.from(options).some(option => option.contains(event.target));
+  
+        if (!clickedInsideOption) {
+          console.log('Deschide/opreste pachet');
+  
+          options.forEach(function (option) {
+            if (option.style.display === 'none' || option.style.display === '') {
+              option.style.display = 'block';
+            } else {
+              option.style.display = 'none';
+            }
+          });
+  
+          // Închide celelalte pachete
+          packages.forEach(function (otherPackage) {
+            if (otherPackage !== package) {
+              otherPackage.querySelectorAll('.option').forEach(function (otherOption) {
+                otherOption.style.display = 'none';
+              });
+            }
+          });
+        }
+      });
+    });
+  });
+  
